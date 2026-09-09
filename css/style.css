@@ -1,0 +1,1954 @@
+/* ==========================================================================
+   TOYOTA BHARAT (INDIA) OFFICIAL STYLING & DESIGN SYSTEM
+   Theme: Toyota Racing Red (#EB0A1E), Carbon Black (#0C0C0E), Metallic Dark
+   ========================================================================== */
+
+/* --- CSS Variables / Custom Properties --- */
+:root {
+  --toyota-red: #EB0A1E;
+  --toyota-red-hover: #D30517;
+  --toyota-dark-red: #990000;
+  --toyota-black: #0C0C0E;
+  --toyota-dark-bg: #141418;
+  --toyota-card-bg: #1E1E24;
+  --toyota-slate: #2B2C34;
+  --toyota-gray-light: #F4F5F8;
+  --toyota-gray-border: #E2E4EB;
+  --toyota-gray-text: #666C7E;
+  --toyota-white: #FFFFFF;
+  
+  --hybrid-blue: #0066CC;
+  --hybrid-blue-light: #E6F2FF;
+  --eco-green: #10B981;
+
+  --font-main: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-accent: 'Outfit', sans-serif;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.18);
+  --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base Reset & Box Sizing --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  font-size: 16px;
+}
+
+section, [id] {
+  scroll-margin-top: 80px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--toyota-white);
+  color: var(--toyota-black);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+/* --- Helper Containers --- */
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 3.5vw, 28px);
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 clamp(10px, 3vw, 32px);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(28px, 4.5vw, 48px);
+}
+
+.section-subtitle {
+  text-transform: uppercase;
+  color: var(--toyota-red);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 1.4vw, 0.85rem);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(1.45rem, 3.2vw, 2.3rem);
+  font-weight: 800;
+  color: var(--toyota-black);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.section-title span {
+  color: var(--toyota-red);
+}
+
+.section-desc {
+  color: var(--toyota-gray-text);
+  font-size: clamp(0.88rem, 1.6vw, 1.05rem);
+  max-width: 680px;
+  margin: 10px auto 0;
+  line-height: 1.5;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--toyota-red);
+  color: var(--toyota-white);
+  border-color: var(--toyota-red);
+}
+
+.btn-primary:hover {
+  background-color: var(--toyota-red-hover);
+  border-color: var(--toyota-red-hover);
+  box-shadow: 0 4px 15px rgba(235, 10, 30, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-dark {
+  background-color: var(--toyota-black);
+  color: var(--toyota-white);
+  border-color: var(--toyota-black);
+}
+
+.btn-dark:hover {
+  background-color: #222228;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--toyota-black);
+  border-color: var(--toyota-black);
+}
+
+.btn-outline:hover {
+  background-color: var(--toyota-black);
+  color: var(--toyota-white);
+}
+
+.btn-outline-red {
+  background-color: transparent;
+  color: var(--toyota-red);
+  border-color: var(--toyota-red);
+}
+
+.btn-outline-red:hover {
+  background-color: var(--toyota-red);
+  color: var(--toyota-white);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   TOP BAR & NAVIGATION HEADER
+   ========================================================================== */
+
+/* --- Top Utility Bar --- */
+.top-bar {
+  background-color: var(--toyota-black);
+  color: #B0B3C0;
+  font-size: 0.78rem;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.top-contacts {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 20px);
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.top-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.top-contact-item a:hover {
+  color: var(--toyota-white);
+}
+
+.top-meta {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 20px);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 1380px) {
+  .top-address {
+    display: none !important;
+  }
+}
+
+.top-badge {
+  background: rgba(235, 10, 30, 0.15);
+  color: var(--toyota-red);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+/* --- Main Header Navigation --- */
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--toyota-white);
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+  transition: all var(--transition-normal);
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(65px, 8.5vh, 80px);
+  gap: clamp(8px, 1.5vw, 16px);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Brand Logo (Sleek Compact & Bold Title) */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 12px);
+  flex-shrink: 0;
+}
+
+.brand-logo-img {
+  height: clamp(50px, 6.5vh, 65px);
+  max-height: 68px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+  flex-shrink: 0;
+}
+
+.brand-title-single {
+  font-size: clamp(0.82rem, 1.05vw, 1.12rem);
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  color: var(--toyota-black);
+  white-space: nowrap;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.brand-title-single span {
+  color: var(--toyota-red);
+}
+
+.nav-brand-black,
+.nav-brand-black span {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Nav Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 1.1vw, 18px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  font-size: clamp(0.72rem, 0.88vw, 0.85rem);
+  font-weight: 700;
+  color: var(--toyota-black);
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--toyota-red);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--toyota-red);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after, .nav-item:hover > .nav-link::after {
+  width: 100%;
+}
+
+/* Mega Menu Dropdown */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: min(860px, 92vw);
+  background: var(--toyota-white);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  border-top: 4px solid var(--toyota-red);
+  padding: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  z-index: 1100;
+}
+
+.nav-item:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.mega-col-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--toyota-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--toyota-gray-border);
+}
+
+.mega-item-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--toyota-black);
+}
+
+.mega-item-link:hover {
+  background-color: var(--toyota-gray-light);
+  color: var(--toyota-red);
+}
+
+/* Nav Actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.8vw, 10px);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-actions .btn {
+  padding: clamp(6px, 0.6vw, 8px) clamp(10px, 0.9vw, 16px);
+  font-size: clamp(0.72rem, 0.82vw, 0.82rem);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* 3-Lines Hamburger Icon Toggle */
+.mobile-toggle {
+  display: none;
+  background: var(--toyota-black);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: var(--radius-sm);
+  padding: 9px 11px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+
+.mobile-toggle:hover, .mobile-toggle.active {
+  background: var(--toyota-red);
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background-color: var(--toyota-white);
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+/* Mobile Drawer Overlay */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 14, 0.75);
+  backdrop-filter: blur(5px);
+  z-index: 1999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(340px, 88vw);
+  height: 100vh;
+  background: var(--toyota-white);
+  z-index: 2000;
+  box-shadow: var(--shadow-dark);
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  overflow-y: auto;
+}
+
+.mobile-drawer.active {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--toyota-gray-light);
+  margin-bottom: 20px;
+}
+
+.drawer-header .brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.drawer-header .drawer-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.drawer-header .brand-title-single,
+.drawer-header .brand-title-single span {
+  color: #000000 !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  line-height: 1.15;
+  white-space: normal !important;
+  letter-spacing: 0.2px;
+}
+
+.drawer-close {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.drawer-section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--toyota-red);
+  margin-bottom: 12px;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-link {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--toyota-black);
+  text-transform: uppercase;
+  display: block;
+  padding: 8px 12px;
+  background: var(--toyota-gray-light);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--toyota-red);
+}
+
+.mobile-nav-link:hover {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+}
+
+.mobile-nav-sublist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-sub-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--toyota-gray-text);
+  display: block;
+  padding: 6px 10px;
+}
+
+.mobile-sub-link:hover {
+  color: var(--toyota-red);
+}
+
+/* ==========================================================================
+   HERO CAROUSEL SECTION
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: clamp(450px, 68vh, 760px);
+  background-color: var(--toyota-black);
+  overflow: hidden;
+}
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: scale(1.02);
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-slide-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(12, 12, 14, 0.92) 0%, rgba(12, 12, 14, 0.65) 60%, rgba(12, 12, 14, 0.25) 100%);
+}
+
+.hero-content-wrap {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.hero-content {
+  max-width: 620px;
+  color: var(--toyota-white);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--toyota-red);
+  color: var(--toyota-white);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero-badge.hybrid {
+  background: var(--hybrid-blue);
+}
+
+.hero-title {
+  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.hero-title span {
+  color: var(--toyota-red);
+}
+
+.hero-subtitle {
+  font-size: clamp(0.9rem, 1.6vw, 1.18rem);
+  color: #D1D5DB;
+  font-weight: 400;
+  margin-bottom: 28px;
+  line-height: 1.45;
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Slider Controls */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--toyota-white);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all var(--transition-fast);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--toyota-red);
+  border-color: var(--toyota-red);
+}
+
+.carousel-prev {
+  left: 16px;
+}
+
+.carousel-next {
+  right: 16px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.carousel-dot.active {
+  width: 30px;
+  border-radius: var(--radius-pill);
+  background: var(--toyota-red);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  z-index: 20;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  position: relative;
+}
+
+.mouse-icon::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: var(--toyota-red);
+  border-radius: 2px;
+  animation: mouseScroll 1.6s infinite;
+}
+
+@keyframes mouseScroll {
+  0% { opacity: 1; top: 6px; }
+  100% { opacity: 0; top: 18px; }
+}
+
+/* ==========================================================================
+   DISCOVER OUR 11 SERVICES (VEHICLE LINEUP EQUIVALENT)
+   ========================================================================== */
+.vehicles-section {
+  padding: clamp(44px, 6.5vw, 80px) 0;
+  background-color: var(--toyota-gray-light);
+}
+
+/* Filter Tabs */
+.filter-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.filter-tabs {
+  display: inline-flex;
+  background: var(--toyota-white);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+  color: var(--toyota-gray-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+}
+
+.tab-btn:hover {
+  color: var(--toyota-black);
+}
+
+.tab-btn.active {
+  background: var(--toyota-red);
+  color: var(--toyota-white);
+  box-shadow: 0 4px 12px rgba(235, 10, 30, 0.3);
+}
+
+/* Vehicles Grid */
+.vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.car-card {
+  background: var(--toyota-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--toyota-gray-border);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.car-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(235, 10, 30, 0.4);
+}
+
+.car-badge-wrap {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.car-badge {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.car-badge.badge-hybrid {
+  background: var(--hybrid-blue);
+}
+
+.car-badge.badge-electric {
+  background: var(--eco-green);
+}
+
+.car-image-box {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(180deg, #F8F9FA 0%, #E9ECEF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.car-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.car-card:hover .car-img {
+  transform: scale(1.06);
+}
+
+.car-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.car-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.car-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--toyota-black);
+  text-transform: uppercase;
+}
+
+.car-tagline {
+  font-size: 0.85rem;
+  color: var(--toyota-gray-text);
+  margin-bottom: 16px;
+}
+
+.car-price-box {
+  background: var(--toyota-gray-light);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.car-price-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--toyota-gray-text);
+  font-weight: 700;
+}
+
+.car-price-value {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--toyota-red);
+}
+
+.car-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--toyota-gray-border);
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--toyota-gray-text);
+}
+
+.spec-icon {
+  font-size: 1rem;
+  color: var(--toyota-black);
+  margin-bottom: 4px;
+}
+
+.spec-val {
+  font-weight: 700;
+  color: var(--toyota-black);
+}
+
+.car-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   PREMIER CLIENTS & BUILDERS SERVICED SECTION (AUTO-SCROLLING LOGO MARQUEE)
+   ========================================================================== */
+.clients-section {
+  padding: 28px 0 20px 0;
+  background: #0C0C0E;
+  color: var(--toyota-white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.clients-title-box {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.clients-subtitle {
+  text-transform: uppercase;
+  color: var(--toyota-red);
+  font-weight: 800;
+  font-size: clamp(0.72rem, 1.2vw, 0.82rem);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.clients-main-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+  font-weight: 900;
+  color: var(--toyota-white);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.clients-main-title span {
+  color: var(--toyota-red);
+}
+
+.logo-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 18px 0;
+  margin-top: 0;
+}
+
+.logo-marquee-wrapper::before,
+.logo-marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 10vw, 140px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #0C0C0E 0%, transparent 100%);
+}
+
+.logo-marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #0C0C0E 0%, transparent 100%);
+}
+
+.logo-marquee-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: scrollMarquee 35s linear infinite;
+}
+
+.logo-marquee-wrapper:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+.logo-card {
+  width: 300px;
+  height: 145px;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.logo-card.logo-card-dark {
+  background: #000000;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.logo-card.logo-card-full {
+  padding: 0 !important;
+  overflow: hidden;
+  background: #000000;
+}
+
+.logo-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: var(--toyota-red);
+  box-shadow: 0 8px 28px rgba(235, 10, 30, 0.35);
+}
+
+.client-logo-img {
+  max-height: 115px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.client-logo-full {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+  border-radius: var(--radius-md);
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================================================
+   360° VIRTUAL SHOWROOM & COLOR VISUALIZER
+   ========================================================================== */
+.showroom-section {
+  padding: clamp(48px, 6.5vw, 90px) 0;
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  position: relative;
+}
+
+.showroom-container {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.showroom-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.showroom-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.showroom-desc {
+  color: #A0A5B5;
+  margin-bottom: 30px;
+  font-size: 0.98rem;
+}
+
+.color-picker-box {
+  margin-bottom: 30px;
+}
+
+.color-picker-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #A0A5B5;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.color-swatches {
+  display: flex;
+  gap: 12px;
+}
+
+.color-chip {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.color-chip.active {
+  border-color: var(--toyota-red);
+  transform: scale(1.15);
+}
+
+.showroom-display {
+  background: radial-gradient(circle at center, #252630 0%, #0C0C0E 75%);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 4vw, 40px);
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.showroom-car-view {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.6));
+  transition: opacity 0.3s ease;
+}
+
+.badge-360 {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-hotspots {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hotspot-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #D1D5DB;
+}
+
+/* ==========================================================================
+   TOYOTA i-CONNECT & HYBRID TECH
+   ========================================================================== */
+.tech-section {
+  padding: clamp(44px, 6.5vw, 80px) 0;
+  background: var(--toyota-white);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.tech-card {
+  background: var(--toyota-gray-light);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  border: 1px solid var(--toyota-gray-border);
+  transition: all var(--transition-normal);
+}
+
+.tech-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--hybrid-blue);
+}
+
+.tech-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--toyota-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--toyota-red);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tech-card.hybrid .tech-icon-wrap {
+  color: var(--hybrid-blue);
+}
+
+.tech-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--toyota-black);
+}
+
+.tech-card-desc {
+  color: var(--toyota-gray-text);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   FACILITY WORKFORCE & STAFFING ESTIMATOR (NO COST/BUDGET DISPLAY)
+   ========================================================================== */
+.tools-section {
+  padding: clamp(44px, 6.5vw, 80px) 0;
+  background: var(--toyota-gray-light);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.tool-card {
+  background: var(--toyota-white);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 3.5vw, 36px);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--toyota-gray-border);
+}
+
+.tool-card-header {
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--toyota-gray-light);
+}
+
+.tool-card-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-weight: 900;
+  color: var(--toyota-black);
+  text-transform: uppercase;
+}
+
+.tool-card-sub {
+  font-size: 0.88rem;
+  color: var(--toyota-gray-text);
+  margin-top: 4px;
+}
+
+/* Form controls */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--toyota-black);
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--toyota-gray-border);
+  background: var(--toyota-white);
+  color: var(--toyota-black);
+  font-size: 0.92rem;
+  transition: border-color var(--transition-fast);
+  min-height: 44px;
+}
+
+.form-control:focus {
+  border-color: var(--toyota-red);
+}
+
+.range-slider-wrap {
+  margin-top: 8px;
+}
+
+.range-slider {
+  width: 100%;
+  accent-color: var(--toyota-red);
+  height: 8px;
+  cursor: pointer;
+}
+
+/* Staffing Result Box (Clean Summary, No Cost/Money) */
+.staffing-summary-box {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  margin-top: 20px;
+  border-left: 5px solid var(--toyota-red);
+}
+
+.summary-total-head {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #A0A5B5;
+}
+
+.summary-total-val {
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+  font-weight: 900;
+  color: var(--toyota-white);
+  margin: 4px 0 14px 0;
+}
+
+.summary-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 12px;
+  color: #D1D5DB;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.summary-item strong {
+  color: var(--toyota-white);
+}
+
+/* ==========================================================================
+   DEALER / LOCATION WIDGET
+   ========================================================================== */
+.dealer-section {
+  padding: clamp(44px, 6.5vw, 80px) 0;
+  background: var(--toyota-white);
+}
+
+.dealer-filter-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 180px;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dealers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.single-head-office-wrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.head-office-primary-card {
+  width: 100%;
+  max-width: 680px;
+  border-left: 6px solid var(--toyota-red);
+  box-shadow: var(--shadow-md);
+}
+
+.dealer-card {
+  background: var(--toyota-gray-light);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--toyota-gray-border);
+  transition: all var(--transition-normal);
+}
+
+.dealer-card:hover {
+  border-color: var(--toyota-red);
+  box-shadow: var(--shadow-md);
+}
+
+.dealer-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--toyota-black);
+}
+
+.dealer-meta {
+  font-size: 0.88rem;
+  color: var(--toyota-gray-text);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   FOOTER SECTION
+   ========================================================================== */
+.footer {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  padding-top: clamp(44px, 6vw, 70px);
+  padding-bottom: 30px;
+  border-top: 4px solid var(--toyota-red);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+.footer-brand-col p {
+  color: #9CA3AF;
+  font-size: 0.88rem;
+  margin-top: 14px;
+  line-height: 1.55;
+}
+
+.footer-col-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--toyota-red);
+  margin-bottom: 18px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #9CA3AF;
+  font-size: 0.85rem;
+}
+
+.footer-links a:hover {
+  color: var(--toyota-white);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #6B7280;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Floating WhatsApp / Action Bar */
+.floating-actions {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.floating-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+.floating-whatsapp {
+  background: #25D366;
+}
+
+.floating-testdrive {
+  background: var(--toyota-red);
+}
+
+/* ==========================================================================
+   MODAL POPUPS
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 14, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  padding: 16px;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: var(--toyota-white);
+  border-radius: var(--radius-lg);
+  width: min(580px, 94vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-dark);
+  transform: translateY(20px);
+  transition: transform var(--transition-normal);
+}
+
+.modal-backdrop.active .modal-card {
+  transform: translateY(0);
+}
+
+.modal-header {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--toyota-red);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--toyota-white);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 90vw;
+}
+
+.toast-msg {
+  background: var(--toyota-black);
+  color: var(--toyota-white);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--toyota-red);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   ROBUST FULL-RESPONSIVE MEDIA QUERIES (ENLARGED MOBILE LOGO & LARGE NAVBAR TITLE)
+   ========================================================================== */
+
+@media (min-width: 1241px) {
+  .desktop-only-btn {
+    display: inline-flex !important;
+  }
+  .top-bar {
+    display: block !important;
+  }
+  .nav-menu {
+    display: flex !important;
+  }
+  .mobile-toggle {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1240px) {
+  .desktop-only-btn {
+    display: none !important;
+  }
+
+  .top-bar {
+    display: none !important;
+  }
+
+  .nav-menu {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: flex !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .showroom-container,
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-grid,
+  .dealers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Mobile View (< 768px): ENLARGED LOGO & LARGE BOLD NAVBAR TITLE --- */
+@media (max-width: 768px) {
+  .nav-container {
+    height: 74px;
+    padding: 0 16px;
+  }
+
+  .brand-logo {
+    gap: 10px;
+  }
+
+  /* Compact Logo on Mobile View */
+  .brand-logo-img {
+    height: 60px;
+  }
+
+  .logo-card {
+    width: 250px;
+    height: 125px;
+    padding: 10px 18px;
+  }
+
+  .client-logo-img {
+    max-height: 98px;
+  }
+
+  /* Large Bold Title on Mobile View */
+  .brand-title-single {
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+  }
+
+  .vehicles-grid,
+  .tech-grid,
+  .service-grid,
+  .dealers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dealer-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-prev {
+    left: 8px;
+  }
+
+  .carousel-next {
+    right: 8px;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .floating-actions {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .floating-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+}
+
+/* --- Small Mobile Phones (< 480px) --- */
+@media (max-width: 480px) {
+  .nav-container {
+    height: 68px;
+    padding: 0 12px;
+  }
+
+  /* Compact Logo on Small Mobile */
+  .brand-logo-img {
+    height: 52px;
+  }
+
+  /* Large Bold Title on Small Mobile */
+  .brand-title-single {
+    font-size: clamp(0.78rem, 3.8vw, 1.02rem);
+    font-weight: 900;
+    letter-spacing: 0.2px;
+  }
+
+  .logo-card {
+    width: 230px;
+    height: 115px;
+    padding: 10px 16px;
+  }
+
+  .client-logo-img {
+    max-height: 90px;
+  }
+
+  .hero-section {
+    height: 440px;
+  }
+
+  .hero-badge {
+    font-size: 0.65rem;
+    padding: 4px 12px;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+  }
+
+  .car-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-tabs {
+    border-radius: 12px;
+  }
+
+  .tab-btn {
+    flex: 1 1 45%;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .summary-item {
+    flex-direction: column;
+    gap: 2px;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "kesari-facility-management",
+  "version": "1.0.0",
+  "description": "Official website for Kesari Facility Management (KFM), Bangalore",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve -l 8080",
+    "start": "python -m http.server 8080"
+  },
+  "keywords": [
+    "kesari",
+    "facility-management",
+    "kudlu",
+    "bangalore"
+  ],
+  "author": "Kesari Facility Management",
+  "license": "UNLICENSED"
+}
