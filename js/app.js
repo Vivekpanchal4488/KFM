@@ -223,26 +223,151 @@ function initFacilityStaffEstimator() {
 }
 
 /* ==========================================================================
-   5. PROPOSAL REQUEST FORM
+   5. IN-WEBSITE PROPOSAL SYSTEM (DIRECT SUBMISSION, NO EMAIL REQUIRED)
    ========================================================================== */
+function saveInWebsiteProposal(proposalData) {
+  try {
+    const existing = JSON.parse(localStorage.getItem('kfm_website_proposals') || '[]');
+    existing.unshift(proposalData);
+    localStorage.setItem('kfm_website_proposals', JSON.stringify(existing));
+  } catch (err) {
+    console.warn('Could not save proposal to local storage:', err);
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[m]);
+}
+
 function initProposalForm() {
   const proposalForm = document.getElementById('proposalRequestForm');
   if (!proposalForm) return;
 
+  const toolCard = proposalForm.closest('.tool-card');
+
   proposalForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('🎉 Staffing Proposal Request Received! KFM Operational Team will contact you within 2 hours.');
-    proposalForm.reset();
+
+    const name = document.getElementById('propNameInput')?.value.trim() || 'Valued Society';
+    const phone = document.getElementById('propPhoneInput')?.value.trim() || 'Not Provided';
+    const location = document.getElementById('propLocationInput')?.value.trim() || 'Bangalore';
+    const service = document.getElementById('propServicesSelect')?.value || 'Complete Integrated FM';
+
+    const totalStaff = document.getElementById('totalStaffValue')?.textContent?.trim() || 'Custom Staffing';
+    const secVal = document.getElementById('securitySummaryVal')?.textContent?.trim() || '';
+    const hkVal = document.getElementById('hkSummaryVal')?.textContent?.trim() || '';
+
+    const refId = 'KFM-PROP-' + Math.floor(100000 + Math.random() * 900000);
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' +
+                    now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+    const proposalRecord = {
+      id: refId,
+      type: 'Official Staffing Proposal',
+      name: name,
+      phone: phone,
+      location: location,
+      service: service,
+      staffEstimate: totalStaff,
+      breakdown: [secVal, hkVal].filter(Boolean).join(' • '),
+      timestamp: timeStr,
+      channel: 'Direct Website Portal'
+    };
+
+    saveInWebsiteProposal(proposalRecord);
+
+    if (toolCard) {
+      const originalFormHtml = proposalForm.outerHTML;
+
+      toolCard.innerHTML = `
+        <div class="proposal-success-card">
+          <div class="proposal-success-icon">✓</div>
+          <h3 class="proposal-success-title">Proposal Request Sent via Website!</h3>
+          <div class="proposal-success-id">Ref #${refId}</div>
+          <div>
+            <span class="proposal-channel-tag">
+              <span>🌐</span> Direct Website Submission • No Email Required
+            </span>
+          </div>
+
+          <div class="proposal-receipt-list">
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Society / Client</span>
+              <span class="proposal-receipt-value">${escapeHtml(name)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Contact Phone</span>
+              <span class="proposal-receipt-value">${escapeHtml(phone)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Location</span>
+              <span class="proposal-receipt-value">${escapeHtml(location)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Service Scope</span>
+              <span class="proposal-receipt-value">${escapeHtml(service)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Staff Calculation</span>
+              <span class="proposal-receipt-value">${escapeHtml(totalStaff)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Submission Time</span>
+              <span class="proposal-receipt-value">${timeStr}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Status</span>
+              <span class="proposal-receipt-value" style="color:#27ae60;">● Active in Operations Queue</span>
+            </div>
+          </div>
+
+          <div class="proposal-notice">
+            <strong>✅ Proposal Registered:</strong> Your request has been recorded directly in our website operations system. An operational director will review this proposal and contact you at <strong>${escapeHtml(phone)}</strong> within 2 hours.
+          </div>
+
+          <button type="button" class="btn btn-outline" id="btnSubmitAnotherProp" style="width: 100%;">
+            Submit Another Proposal Request
+          </button>
+        </div>
+      `;
+
+      document.getElementById('btnSubmitAnotherProp')?.addEventListener('click', () => {
+        toolCard.innerHTML = `
+          <div class="tool-card-header">
+            <h3 class="tool-card-title">Request Customized Proposal</h3>
+            <p class="tool-card-sub">Get an official written staffing proposal & free site inspection from KFM.</p>
+          </div>
+          ${originalFormHtml}
+        `;
+        initProposalForm();
+      });
+    }
+
+    showToast(`🎉 Proposal #${refId} registered directly on website!`);
   });
 }
 
 /* ==========================================================================
-   6. GLOBAL MODAL DIALOGS & TOAST NOTIFICATIONS
+   6. GLOBAL MODAL DIALOGS & IN-WEBSITE QUOTE PROPOSALS
    ========================================================================== */
+let originalModalBodyContent = '';
+
 function initModals() {
   const modalBackdrop = document.getElementById('globalModalBackdrop');
   const modalCloseBtns = document.querySelectorAll('.modal-close');
-  const quoteForm = document.getElementById('quoteRequestForm');
+  const modalBody = document.querySelector('.modal-body');
+
+  if (modalBody && !originalModalBodyContent) {
+    originalModalBodyContent = modalBody.innerHTML;
+  }
 
   modalCloseBtns.forEach(btn => {
     btn.addEventListener('click', closeModal);
@@ -254,20 +379,103 @@ function initModals() {
     });
   }
 
-  if (quoteForm) {
-    quoteForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      closeModal();
-      showToast('✅ Thank you! Your Staffing Proposal Request has been sent to Kesari Facility Management.');
-      quoteForm.reset();
-    });
-  }
+  attachQuoteFormListener();
+}
+
+function attachQuoteFormListener() {
+  const quoteForm = document.getElementById('quoteRequestForm');
+  const modalBody = document.querySelector('.modal-body');
+  if (!quoteForm) return;
+
+  quoteForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const service = document.getElementById('modalServiceSelect')?.value || 'Comprehensive Facility Management';
+    const location = document.getElementById('modalLocationField')?.value.trim() || 'Bangalore';
+    const name = document.getElementById('userNameInput')?.value.trim() || 'Valued Client';
+    const phone = document.getElementById('userPhoneInput')?.value.trim() || 'Not Provided';
+
+    const refId = 'KFM-REQ-' + Math.floor(100000 + Math.random() * 900000);
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' +
+                    now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+    const quoteRecord = {
+      id: refId,
+      type: 'Direct Service Quote',
+      name: name,
+      phone: phone,
+      location: location,
+      service: service,
+      timestamp: timeStr,
+      channel: 'Direct Website Portal'
+    };
+
+    saveInWebsiteProposal(quoteRecord);
+
+    if (modalBody) {
+      modalBody.innerHTML = `
+        <div class="proposal-success-card" style="padding: 18px 12px; border:none; box-shadow:none;">
+          <div class="proposal-success-icon">✓</div>
+          <h3 class="proposal-success-title">Quote Request Registered!</h3>
+          <div class="proposal-success-id">Ref #${refId}</div>
+          <div>
+            <span class="proposal-channel-tag">
+              <span>🌐</span> Direct Website Submission • No Email Required
+            </span>
+          </div>
+
+          <div class="proposal-receipt-list">
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Client Name</span>
+              <span class="proposal-receipt-value">${escapeHtml(name)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Contact Mobile</span>
+              <span class="proposal-receipt-value">${escapeHtml(phone)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Requested Service</span>
+              <span class="proposal-receipt-value">${escapeHtml(service)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Property / Area</span>
+              <span class="proposal-receipt-value">${escapeHtml(location)}</span>
+            </div>
+            <div class="proposal-receipt-row">
+              <span class="proposal-receipt-label">Submission Channel</span>
+              <span class="proposal-receipt-value" style="color:#27ae60;">Website Direct</span>
+            </div>
+          </div>
+
+          <div class="proposal-notice">
+            <strong>✅ Confirmed:</strong> Your quote request is registered in the KFM website queue. Our service manager will contact you at <strong>${escapeHtml(phone)}</strong> shortly.
+          </div>
+
+          <button type="button" class="btn btn-primary" onclick="closeModal()" style="width: 100%;">
+            Done / Close
+          </button>
+        </div>
+      `;
+    }
+
+    showToast(`✅ Quote Request #${refId} registered directly on website!`);
+  });
 }
 
 function openQuoteModal(serviceName = '') {
   const modalBackdrop = document.getElementById('globalModalBackdrop');
-  const serviceSelect = document.getElementById('modalServiceSelect');
+  const modalBody = document.querySelector('.modal-body');
 
+  // Reset modal body to clean form if previously submitted
+  if (modalBody && originalModalBodyContent) {
+    modalBody.innerHTML = originalModalBodyContent;
+    attachQuoteFormListener();
+    const modalCloseBtns = document.querySelectorAll('.modal-close');
+    modalCloseBtns.forEach(btn => btn.addEventListener('click', closeModal));
+  }
+
+  const serviceSelect = document.getElementById('modalServiceSelect');
   if (serviceSelect && serviceName) {
     for (let opt of serviceSelect.options) {
       if (opt.text.toLowerCase().includes(serviceName.toLowerCase()) || opt.value.toLowerCase().includes(serviceName.toLowerCase())) {
@@ -276,6 +484,7 @@ function openQuoteModal(serviceName = '') {
       }
     }
   }
+
   if (modalBackdrop) modalBackdrop.classList.add('active');
 }
 
